@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx
+  labels:
+    app: nginx-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: nginx-server
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.19.4
+          resources:
+            limits:
+              cpu: "20m"
+              memory: "128Mi"
+            requests:
+              cpu: "20m"
+              memory: "128Mi"
